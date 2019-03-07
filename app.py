@@ -7,13 +7,14 @@ import time
 import datetime
 
 app = Flask(__name__)
+os.environ['PATH'] += ':'+os.path.dirname(os.path.realpath(__file__))+"/webdrivers/chromedriver.exe"
 
 # Initialize the headless browser that is going to be used by the app.
 chrome_options = webdriver.ChromeOptions()
 chrome_options.headless = True
 chrome_driver = webdriver.Chrome(
     'webdrivers/chromedriver.exe',
-    options=chrome_options
+    options = chrome_options
     )
 
 # Dictionary to map city names to the correct code used by SNCF ( NOT COMPLETE )
@@ -35,7 +36,7 @@ def get_tgvmax_available(departure_city, arrival_city, date):
     response = []
     
     chrome_driver.get(url)
-    time.sleep(5)
+    #time.sleep(5)
     
     elements_tgvmax = chrome_driver.find_elements_by_css_selector(".proposal.best-price-of-calendar.tgv-max-price")
     
