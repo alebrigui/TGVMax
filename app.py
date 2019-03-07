@@ -36,7 +36,7 @@ def get_tgvmax_available(departure_city, arrival_city, date):
     response = []
     
     chrome_driver.get(url)
-    #time.sleep(5)
+    time.sleep(5)
     
     elements_tgvmax = chrome_driver.find_elements_by_css_selector(".proposal.best-price-of-calendar.tgv-max-price")
     
@@ -66,7 +66,6 @@ def setup_tgvmax_alert():
     arrival_city    = data['arrival_city']
     # Transform the parsed date to the format necessary for the url
     date            = datetime.date.fromisoformat(data['date'])
-
 
     response    = get_tgvmax_available(departure_city, arrival_city, date)
 
