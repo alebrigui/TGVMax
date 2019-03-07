@@ -15,11 +15,13 @@ chrome_driver = webdriver.Chrome(
     'webdrivers/chromedriver.exe',
     options=chrome_options
     )
+
 # Dictionary to map city names to the correct code used by SNCF ( NOT COMPLETE )
 _city_dict = {"Paris":"FRPAR", "Vannes":"FRVNE", "Lille":"FRLIL"}
 
 def get_tgvmax_available(departure_city, arrival_city, date):
 
+	date = date.strftime("%Y%m%d")
 	# Generate the correct URL for the itinerary
     base_url = "https://www.oui.sncf/bons-plans/tgvmax#!"
     url_params_one = ("{}/{}/{}".format(_city_dict[departure_city],_city_dict[arrival_city],date))
@@ -27,6 +29,8 @@ def get_tgvmax_available(departure_city, arrival_city, date):
     last_part = "{}-{}-{}-{}".format(_city_dict[departure_city],_city_dict[arrival_city],date,date)
 
     url = '/'.join([base_url,url_params_one,verbose,last_part])
+
+    print (url)
 
     response = []
     
@@ -59,7 +63,9 @@ def setup_tgvmax_alert():
 
     departure_city  = data['departure_city']
     arrival_city    = data['arrival_city']
+    # Transform the parsed date to the format necessary for the url
     date            = datetime.date.fromisoformat(data['date'])
+
 
     response    = get_tgvmax_available(departure_city, arrival_city, date)
 
