@@ -21,8 +21,8 @@ _city_dict = {"Paris":"FRPAR", "Vannes":"FRVNE", "Lille":"FRLIL"}
 
 def get_tgvmax_available(departure_city, arrival_city, date):
 
-	date = date.strftime("%Y%m%d")
-	# Generate the correct URL for the itinerary
+    date = date.strftime("%Y%m%d")
+    # Generate the correct URL for the itinerary
     base_url = "https://www.oui.sncf/bons-plans/tgvmax#!"
     url_params_one = ("{}/{}/{}".format(_city_dict[departure_city],_city_dict[arrival_city],date))
     verbose = "ONE_WAY/2/12-HAPPY_CARD"
